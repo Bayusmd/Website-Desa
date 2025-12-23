@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements FilamentUser
 {
     use Notifiable;
 
@@ -40,6 +42,11 @@ class Admin extends Authenticatable
     return $this->nama_admin ?? 'Admin';
     }
 
+    public function canAccessPanel(Panel $panel): bool
+    {
+        // Berikan akses true agar admin bisa masuk ke dashboard
+        return true;
+    }
     // jika kolom password bernama bukan 'password' (mis. password_admin), override:
     // public function getAuthPassword()
     // {
