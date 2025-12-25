@@ -113,6 +113,7 @@
                                name="berkas[{{ $s->id_syarat }}]"
                                accept=".jpg,.jpeg,.png"
                                required
+                               title="Unggah File sesuai dengan format"
                                class="block w-full text-sm border rounded px-3 py-2">
 
                         <p class="text-xs text-gray-500 mt-1">
