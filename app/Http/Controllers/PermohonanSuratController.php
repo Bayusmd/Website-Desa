@@ -42,7 +42,9 @@ class PermohonanSuratController extends Controller
                     'regex:/^[a-zA-Z\s\.\']+$/'
                     ],
             'nik_pemohon' => [
-                'required|numeric|digits:16'],
+                'required',
+                'numeric',
+                'digits:16'],
             'alamat_pemohon' => 'required',
             'no_whatsapp' => [
                     'required',
@@ -53,10 +55,11 @@ class PermohonanSuratController extends Controller
                     'email',
                     'max:100'
                 ],
-            'berkas.*' => 'file|required'
+            'berkas.*' => 'required|file|mimes:jpg,jpeg,png|max:2048'
             ],
          [
             'nik_pemohon.digits' => 'NIK harus berjumlah 16 digit.',
+            'nik_pemohon.required' => 'NIK harus di isi dan  berjumlah 16 digit.',
 
             'nama_pemohon.required' => 'Nama pemohon wajib diisi.',
             'nama_pemohon.min' => 'Nama pemohon minimal 3 karakter.',
@@ -69,6 +72,10 @@ class PermohonanSuratController extends Controller
 
             'no_whatsapp.required' => 'Nomor WhatsApp wajib diisi.',
             'no_whatsapp.regex' => 'Nomor WhatsApp harus diawali 08 atau 628 dan hanya angka.',
+
+            'berkas.*.max'       => 'Ukuran file tidak boleh lebih dari 2MB.',
+            'berkas.*.mimes'     => 'Hanya file gambar (JPG, JPEG, PNG) yang diperbolehkan!',
+            'berkas.*.required'       => 'Harus menggunggah File yang diminta.'
         ]);
 
         $permohonan = PermohonanSurat::create([

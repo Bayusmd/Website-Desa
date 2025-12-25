@@ -18,7 +18,8 @@ class PermohonanTrackingController extends Controller
             'nik' => 'required|numeric|digits:16'
         ],
     [
-        'nik.digits' => 'NIK harus berjumlah 16 digit.'
+        'nik.digits' => 'NIK harus berjumlah 16 digit.',
+         'nik.required' => 'NIK harus di isi dan  berjumlah 16 digit.'
     ]);
 
         $permohonan = PermohonanSurat::with('layanan', 'berkas')

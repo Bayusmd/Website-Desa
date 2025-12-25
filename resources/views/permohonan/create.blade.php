@@ -26,7 +26,9 @@
 
             <div>
                 <label class="block font-medium mb-1">NIK Pemohon</label>
-                <input type="text" inputmode="numeric" name="nik_pemohon"
+                <input type="text" inputmode="numeric"
+                    name="nik_pemohon"
+                    value="{{ old('nik_pemohon') }}"
                     minlength="16"
                     maxlength="16"
                     title="NIK harus berupa 16 digit angka"
@@ -55,9 +57,13 @@
                 <label class="block font-medium mb-1">Alamat Pemohon</label>
                 <textarea name="alamat_pemohon" rows="3"
                         required
+                        value="{{ old('alamat_pemohon') }}"
                         title="Masukkan Alamat Anda (Nama Dusun RT/RW)"
                         placeholder="Masukkan Alamat Anda (Nama Dusun dan RT/RW)"
                           class="border w-full px-4 py-2 rounded focus:ring focus:ring-blue-200"></textarea>
+                    <p class="text-xs text-gray-500 mt-1">
+                        Contoh: Dusun Patih RT 01 / RW 08
+                    </p>
             </div>
 
             <div>
