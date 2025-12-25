@@ -41,7 +41,9 @@ class PermohonanSuratController extends Controller
                     'max:100',
                     'regex:/^[a-zA-Z\s\.\']+$/'
                     ],
-            'nik_pemohon' => 'required|numeric',
+            'nik_pemohon' => [
+                'required|numeric',
+                'max:16'],
             'alamat_pemohon' => 'required',
             'no_whatsapp' => [
                     'required',
