@@ -42,8 +42,7 @@ class PermohonanSuratController extends Controller
                     'regex:/^[a-zA-Z\s\.\']+$/'
                     ],
             'nik_pemohon' => [
-                'required|numeric',
-                'max:16'],
+                'required|numeric|digits:16'],
             'alamat_pemohon' => 'required',
             'no_whatsapp' => [
                     'required',
@@ -57,6 +56,8 @@ class PermohonanSuratController extends Controller
             'berkas.*' => 'file|required'
             ],
          [
+            'nik_pemohon.digits' => 'NIK harus berjumlah 16 digit.',
+
             'nama_pemohon.required' => 'Nama pemohon wajib diisi.',
             'nama_pemohon.min' => 'Nama pemohon minimal 3 karakter.',
             'nama_pemohon.max' => 'Nama pemohon maksimal 100 karakter.',
