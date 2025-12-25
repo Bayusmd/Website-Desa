@@ -26,6 +26,8 @@
                 </label>
 
                 <select name="kategori_aduan"
+                        required
+                        title="pilih salah satu kategori aduan"
                         class="w-full border px-4 py-2 rounded-lg
                                focus:ring focus:ring-blue-200
                                focus:border-blue-500
@@ -47,6 +49,9 @@
                 </label>
 
                 <textarea name="deskripsi_aduan" rows="4"
+                        required
+                        minlength="10"
+                        title="Masukkan aduan anda minimal 10 karakter"
                           placeholder="Tuliskan aduan Anda secara detail, lengkap dan menggunakan bahas yang baik . . ."
                           class="w-full border px-4 py-2 rounded-lg
                                  focus:ring focus:ring-blue-200

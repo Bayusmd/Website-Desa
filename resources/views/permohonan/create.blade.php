@@ -26,14 +26,23 @@
 
             <div>
                 <label class="block font-medium mb-1">NIK Pemohon</label>
-                <input type="text" inputmode="numeric" name="nik_pemohon" placeholder="Masukkan NIK anda (Max:16 digit)"
+                <input type="text" inputmode="numeric" name="nik_pemohon"
+                    minlength="16"
+                    maxlength="16"
+                    title="NIK harus berupa 16 digit angka"
+                    pattern="[0-9]{16}"placeholder="Masukkan NIK anda (Max:16 digit)"
                        class="border w-full px-4 py-2 rounded focus:ring focus:ring-blue-200">
             </div>
 
             <div>
                 <label class="block font-medium mb-1">Nama Pemohon</label>
-                <input type="text" required name="nama_pemohon"  value="{{ old('nama_pemohon') }}" placeholder="Masukkan Nama Lengkap Anda"
-                       class="border w-full px-4 py-2 rounded focus:ring focus:ring-blue-200 @error('nama_pemohon') border-red-500 @enderror">
+                <input type="text" required name="nama_pemohon"
+                    value="{{ old('nama_pemohon') }}"
+                    minlength="3"
+                    pattern="[A-Za-z\s]+"
+                    title="Nama Pemohon minimal berisi 3 karakter dan hanya boleh berisi huruf dan spasi"
+                    placeholder="Masukkan Nama Lengkap Anda"
+                    class="border w-full px-4 py-2 rounded focus:ring focus:ring-blue-200 @error('nama_pemohon') border-red-500 @enderror">
                        @error('nama_pemohon')
                             <p class="text-sm text-red-600 mt-1">
                                 {{ $message }}
@@ -43,14 +52,23 @@
 
             <div>
                 <label class="block font-medium mb-1">Alamat Pemohon</label>
-                <textarea name="alamat_pemohon" rows="3" required placeholder="Masukkan Alamat Anda (Nama Dusun dan RT/RW)"
+                <textarea name="alamat_pemohon" rows="3"
+                        required
+                        title="Masukkan Alamat Anda (Nama Dusun RT/RW)"
+                        placeholder="Masukkan Alamat Anda (Nama Dusun dan RT/RW)"
                           class="border w-full px-4 py-2 rounded focus:ring focus:ring-blue-200"></textarea>
             </div>
 
             <div>
                 <label class="block font-medium mb-1">No WhatsApp</label>
-                <input type="text" inputmode="numeric" name="no_whatsapp"   pattern="[0-9]*" value="{{ old('no_whatsapp') }}" placeholder="Masukkan No Wa Anda (Contoh: 081234567890)"
-                       class="border w-full px-4 py-2 rounded focus:ring focus:ring-blue-200 @error('no_whatsapp') border-red-500 @enderror">
+                <input type="text" inputmode="numeric" name="no_whatsapp"
+                    pattern="[0-9]*"
+                    value="{{ old('no_whatsapp') }}"
+                    minlength="10"
+                    maxlength="15"
+                    title="Masukkan nomor WhatsApp yang valid (hanya angka)"
+                    placeholder="Masukkan No Wa Anda (Contoh: 081234567890)"
+                    class="border w-full px-4 py-2 rounded focus:ring focus:ring-blue-200 @error('no_whatsapp') border-red-500 @enderror">
                         @error('no_whatsapp')
                             <p class="text-sm text-red-600 mt-1">
                                 {{ $message }}
@@ -63,7 +81,11 @@
 
             <div>
                 <label class="block font-medium mb-1">Email Pemohon</label>
-                <input type="email" required name="email_pemohon"  value="{{ old('email_pemohon') }}" placeholder="Masukkan Email Anda (Contoh: anda123@gmail.com)"
+                <input type="email" required
+                    name="email_pemohon"
+                    value="{{ old('email_pemohon') }}"
+                    title="Masukkan alamat email yang valid"
+                    placeholder="Masukkan Email Anda (Contoh: anda123@gmail.com)"
                        class="border w-full px-4 py-2 rounded focus:ring focus:ring-blue-200  @error('email_pemohon') border-red-500 @enderror">
                        @error('email_pemohon')
                             <p class="text-sm text-red-600 mt-1">
@@ -90,11 +112,16 @@
                         <input type="file"
                                name="berkas[{{ $s->id_syarat }}]"
                                accept=".jpg,.jpeg,.png"
+                               required
                                class="block w-full text-sm border rounded px-3 py-2">
 
                         <p class="text-xs text-gray-500 mt-1">
-                            Format: JPG / PNG · Maksimal 2 MB
+                            Format: JPG / JPEG / PNG · Maksimal 2 MB
                         </p>
+
+                        @error('berkas.'.$s->id_syarat)
+                            <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
                 @endforeach
             </div>
