@@ -64,13 +64,6 @@ class BerkasPermohonanResource extends Resource
                 Tables\Columns\TextColumn::make('nama_berkas')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('file_path')
-
-
-
-
-
-
-
                     ->searchable(),
                 Tables\Columns\TextColumn::make('tanggal_upload_berkas')
                     ->date()
@@ -80,7 +73,7 @@ class BerkasPermohonanResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

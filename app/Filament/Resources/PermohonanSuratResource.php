@@ -257,7 +257,7 @@ class PermohonanSuratResource extends Resource
                                         <!-- Preview -->
                                         <a href=\"{$url}\"
                                            target=\"_blank\"
-                                           class=\"text-blue-600 hover:text-blue-800 underline\">
+                                           class=\"text-blue-600 hover:text-blue-800 underline \">
                                            👁 Preview
                                         </a>
 

@@ -41,7 +41,9 @@ class Admin extends Authenticatable implements FilamentUser
     {
     return $this->nama_admin ?? 'Admin';
     }
-
+    //-------------------------------------------
+    // TAMBAHAN AGAR KETIKA HOSTING FILAMENT ADMIN LOGIN MELALUI TABEL ADMIN BISA JALAN
+    //--------------------------------------------
     public function canAccessPanel(Panel $panel): bool
     {
         // Berikan akses true agar admin bisa masuk ke dashboard
