@@ -18,7 +18,12 @@
 
         <input type="text" name="nik"
                class="w-full border px-4 py-2 rounded-lg focus:ring focus:ring-blue-200"
-               placeholder="Contoh: 3275010201010001" required>
+               placeholder="Contoh: 3275010201010001"
+               required
+               minlength="16"
+               maxlength="16"
+               title="NIK harus berupa 16 digit angka"
+               pattern="[0-9]{16}">
 
         <button class="mt-4 bg-gray-600 hover:bg-gray-700
                        text-white px-6 py-2 rounded-lg transition">

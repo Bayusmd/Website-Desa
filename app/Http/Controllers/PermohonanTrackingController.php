@@ -15,8 +15,11 @@ class PermohonanTrackingController extends Controller
     public function search()
     {
         request()->validate([
-            'nik' => 'required|numeric'
-        ]);
+            'nik' => 'required|numeric|digits:16'
+        ],
+    [
+        'nik.digits' => 'NIK harus berjumlah 16 digit.'
+    ]);
 
         $permohonan = PermohonanSurat::with('layanan', 'berkas')
             ->where('nik_pemohon', request('nik'))

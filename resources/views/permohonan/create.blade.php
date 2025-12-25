@@ -30,7 +30,8 @@
                     minlength="16"
                     maxlength="16"
                     title="NIK harus berupa 16 digit angka"
-                    pattern="[0-9]{16}"placeholder="Masukkan NIK anda (Max:16 digit)"
+                    pattern="[0-9]{16}"
+                    placeholder="Masukkan NIK anda (Max:16 digit)"
                        class="border w-full px-4 py-2 rounded focus:ring focus:ring-blue-200">
             </div>
 
