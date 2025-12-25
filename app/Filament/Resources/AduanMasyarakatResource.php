@@ -35,14 +35,17 @@ class AduanMasyarakatResource extends Resource
                             'kambitbmas' => 'Kamtibmas',
                             'pelayanan' => 'Pelayanan',
                             'lain-lain' => 'Lain-lain',
-                        ]),
+                        ])
+                    ->disabled()
+                    ->dehydrated(true),
                 Forms\Components\TextInput::make('deskripsi_aduan')
                     ->required()
-                    ->placeholder('Tuliskan aduan anda')
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->readOnly(),
                 Forms\Components\DatePicker::make('tanggal_aduan')
                     ->default(now())
-                    ->required(),
+                    ->required()
+                    ->disabled(),
                 Forms\Components\Select::make('status_aduan')
                     ->options([
                     'baru' => 'Baru',
