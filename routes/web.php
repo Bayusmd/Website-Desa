@@ -99,7 +99,12 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
+use Illuminate\Support\Facades\Artisan;
 
+Route::get('/link-storage', function () {
+    Artisan::call('storage:link');
+    return 'Storage link has been created.';
+});
 
 
 
