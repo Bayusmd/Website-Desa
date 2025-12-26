@@ -39,7 +39,7 @@ class AgendaDesaResource extends Resource
                     ->required()
                     ->maxLength(45),
                 Forms\Components\TextInput::make('deskripsi_agenda')
-                     ->placeholder('Tuliskan deskripsi agenda secara lengkap')
+                    ->placeholder('Tuliskan deskripsi agenda secara lengkap')
                     ->required()
                     ->maxLength(255),
             ]);

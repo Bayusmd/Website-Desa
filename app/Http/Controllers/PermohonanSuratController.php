@@ -48,7 +48,7 @@ class PermohonanSuratController extends Controller
             'alamat_pemohon' => 'required',
             'no_whatsapp' => [
                     'required',
-                    'regex:/^(08|628)[0-9]{8,11}$/'
+                    'regex:/^(08|628)[0-9]{9,15}$/'
         ],
              'email_pemohon' => [
                     'required',

@@ -71,7 +71,7 @@
                 <input type="text" inputmode="numeric" name="no_whatsapp"
                     pattern="[0-9]*"
                     value="{{ old('no_whatsapp') }}"
-                    minlength="10"
+                    minlength="9"
                     maxlength="15"
                     title="Masukkan nomor WhatsApp yang valid (hanya angka)"
                     placeholder="Masukkan No Wa Anda (Contoh: 081234567890)"

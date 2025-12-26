@@ -64,7 +64,13 @@ class PermohonanSuratResource extends Resource
                 Forms\Components\TextInput::make('nama_pemohon')
                     ->required()
                     ->label('Nama Pemohon')
-                    ->placeholder('Masukkan nama lengkap pemohon'),
+                    ->placeholder('Masukkan nama lengkap pemohon')
+                    ->minLength(3) // Validasi minimal 3 karakter
+                    ->regex('/^[a-zA-Z\s]*$/') // Hanya huruf (a-z, A-Z) dan spasi (\s)
+                    ->validationMessages([
+                        'regex' => 'Nama pemohon hanya boleh berisi huruf dan spasi.',
+                        'min' => 'Nama pemohon minimal harus 3 karakter.',
+                    ]),
 
                 Forms\Components\TextInput::make('nik_pemohon')
                     ->required()
@@ -84,14 +90,15 @@ class PermohonanSuratResource extends Resource
                 Forms\Components\TextInput::make('alamat_pemohon')
                     ->label('Alamat Pemohon')
                     ->placeholder('Masukkan alamat lengkap (Dusun, RT/RW)')
-                    ->required(),
+                    ->required()
+                    ->helperText('Contoh: Dusun Patih RT 01 / RW 01'),
 
                 Forms\Components\TextInput::make('no_whatsapp')
                     ->required()
                     ->label('No Whatsapp Pemohon')
                     ->tel()
                     ->placeholder('Contoh: 081234567890')
-                    ->rule('regex:/^(08|628)[0-9]{8,11}$/')
+                    ->rule('regex:/^(08|628)[0-9]{9,15}$/')
                     ->validationMessages([
                         'required' => 'Nomor WhatsApp wajib diisi.',
                         'regex'    => 'Gunakan format 08xxxxxxxxxx atau 628xxxxxxxxxx.',

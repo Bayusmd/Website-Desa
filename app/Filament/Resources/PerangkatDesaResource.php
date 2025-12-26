@@ -38,6 +38,7 @@ class PerangkatDesaResource extends Resource
                 ->maxLength(100),
 
             Forms\Components\Select::make('jabatan')
+                ->required()
                 ->options([
                     'Kepala Desa' => 'Kepala Desa',
                     'Sekertaris Desa' => 'Sekertaris Desa',
