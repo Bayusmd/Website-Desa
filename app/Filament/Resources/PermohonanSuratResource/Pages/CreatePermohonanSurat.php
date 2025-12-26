@@ -65,7 +65,7 @@ class CreatePermohonanSurat extends CreateRecord
               }
               Notification::make()
                   ->title('Permohonan Baru')
-                  ->body('Ada permohonan baru yang baru masuk.')
+                  ->body('Ada permohonan '. $permohonan->layanan->nama_layanan.' baru yang baru masuk.')
                   ->success()
                   ->actions([
                       Action::make('view')
