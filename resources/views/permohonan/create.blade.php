@@ -1,8 +1,38 @@
 @extends('layouts.app', ['title' => 'Pengajuan Permohonan Surat Desa Lemahbang'])
 
 @section('content')
-<div class="max-w-4xl mx-auto pt-20 pb-20">
 
+     {{-- NOTIFIKASI SUKSES --}}
+     @if (session('success'))
+         <div
+             x-data="{ open: true }"
+             x-show="open"
+             x-transition
+             class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+         >
+             <div
+                 @click.outside="open = false"
+                 class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6 text-center"
+             >
+                 <div class="text-green-600 text-5xl mb-4">✔</div>
+                 <h2 class="text-2xl font-bold text-gray-800 mb-2">
+                     Berhasil!
+                 </h2>
+                 <p class="text-gray-600 mb-6">
+                     {{ session('success') }}
+                 </p>
+                 <button
+                     @click="open = false"
+                     class="bg-green-600 hover:bg-green-700
+                            text-white px-6 py-2 rounded-lg
+                            transition"
+                 >
+                     OK
+                 </button>
+             </div>
+         </div>
+     @endif
+<div class="max-w-4xl mx-auto pt-20 pb-20">
     <h2 class="text-3xl font-bold mb-6 text-center">
         Ajukan Permohonan Surat
     </h2>

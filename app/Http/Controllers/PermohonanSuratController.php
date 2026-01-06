@@ -110,9 +110,7 @@ class PermohonanSuratController extends Controller
         }
         // kirim notif ke admin panel
         $admin = Admin::first();
-         if (! $admin) {
-            return; // kalau admin tidak ada, hentikan supaya tidak error
-        }
+         if ($admin) {
         Notification::make()
             ->title('Permohonan Baru')
             ->body('Ada permohonan layanan '. $permohonan->layanan->nama_layanan.' baru yang baru masuk.')
@@ -124,30 +122,12 @@ class PermohonanSuratController extends Controller
                   Action::make('markAsRead')
                       ->button()
                       ->markAsRead(),])
-            ->sendToDatabase($admin);
-        return redirect()->route('permohonan.index')->with('success', 'Permohonan surat berhasil diajukan!');
+            ->sendToDatabase($admin); }
+        return redirect()
+            ->back()
+            ->with('success', 'Permohonan surat berhasil diajukan! silahkan tunggu proses selesai, anda dapat mengeceknya melalui halaman status permohonan.');
     }
 
-
-    // kirim notif wa untuk permohonan selesai
-        // public function selesai($id)
-        // {
-            // $permohonan = PermohonanSurat::findOrFail($id);
-
-            // Cegah kirim ulang
-            // if ($permohonan->status_permohonan === 'selesai') {
-                // return back()->with('info', 'Permohonan sudah selesai.');
-            // }
-
-            // $permohonan->update([
-                // 'status_permohonan' => 'selesai'
-            // ]);
-
-            // DISPATCH QUEUE
-            // KirimWaPermohonanSelesai::dispatch($permohonan);
-
-            // return back()->with('success', 'Permohonan diselesaikan & WA dikirim.');
-        // }
 
 
 }

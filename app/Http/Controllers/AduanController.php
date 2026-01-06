@@ -35,9 +35,7 @@ class AduanController extends Controller
 
          // kirim notif ke admin panel
         $admin = Admin::first();
-         if (! $admin) {
-            return;
-        }
+         if ($admin) {
         Notification::make()
             ->title('Aduan Masyarakat Baru')
             ->body('Ada Aduan '.$aduan->kategori_aduan.' dari Masyarakat baru yang baru masuk.')
@@ -49,8 +47,10 @@ class AduanController extends Controller
                   Action::make('markAsRead')
                       ->button()
                       ->markAsRead(),])
-            ->sendToDatabase($admin);
+            ->sendToDatabase($admin);}
 
-        return redirect()->route('aduan.create')->with('success', 'Aduan berhasil dikirim!');
+        return redirect()
+            ->route('aduan.create')
+            ->with('success', 'Aduan berhasil dikirim! Terima kasih atas partisipasi Anda.');
     }
 }
