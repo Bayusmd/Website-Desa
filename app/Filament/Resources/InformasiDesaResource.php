@@ -41,9 +41,10 @@ class InformasiDesaResource extends Resource
                     ->placeholder('Masukkan Judul Informasi Desa')
                     ->required()
                     ->maxLength(45),
-                Forms\Components\TextInput::make('deskripsi')
-                     ->placeholder('Masukkan Deskripsi Lengkap Informasi Desa')
+                Forms\Components\Textarea::make('deskripsi')
+                    ->placeholder('Masukkan Deskripsi Lengkap Informasi Desa')
                     ->required()
+                    ->rows(8)
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('gambar')
                     ->label('Upload Gambar')

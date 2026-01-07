@@ -16,6 +16,23 @@
                       border border-transparent hover:border-blue-300">
 
                 {{-- Header --}}
+
+                @php
+                    $sudahTerlaksana = \Carbon\Carbon::parse($item->tanggal_agenda)->isPast();
+                @endphp
+            
+                @if ($sudahTerlaksana)
+                    <span class="inline-block mb-2 px-3 py-1 text-xs font-semibold
+                                 text-green-700 bg-green-100 rounded-full">
+                        ✔ Sudah Terlaksana
+                    </span>
+                @else
+                    <span class="inline-block mb-2 px-3 py-1 text-xs font-semibold
+                                 text-blue-700 bg-blue-100 rounded-full">
+                        ⏳ Akan Datang
+                    </span>
+                @endif
+
                 <h2 class="text-2xl font-bold text-gray-800
                            group-hover:text-blue-600 transition">
                     {{ $item->nama_agenda }}
@@ -23,7 +40,7 @@
 
                 {{-- Deskripsi --}}
                 <p class="text-gray-600 mt-3 leading-relaxed">
-                    {{ Str::limit($item->deskripsi_agenda, 120) }}
+                    {{ Str::limit($item->deskripsi_agenda, 50, '...') }}
                 </p>
 
                 <hr class="my-4">

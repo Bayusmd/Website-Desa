@@ -38,9 +38,10 @@ class AgendaDesaResource extends Resource
                     ->placeholder('Tuliskan lokasi agenda akan di laksanakan')
                     ->required()
                     ->maxLength(45),
-                Forms\Components\TextInput::make('deskripsi_agenda')
+                Forms\Components\Textarea::make('deskripsi_agenda')
                     ->placeholder('Tuliskan deskripsi agenda secara lengkap')
                     ->required()
+                    ->rows(8) 
                     ->maxLength(255),
             ]);
     }
