@@ -18,9 +18,17 @@ class PermohonanSuratController extends Controller
 {
     public function index()
     {
-        return view('permohonan.index', [
-            'layanan' => LayananSurat::all()
-        ]);
+        $q = request('q');
+
+        $layanan = LayananSurat::when($q, function ($query, $q) {
+            $query->where('nama_layanan', 'like', "%{$q}%")
+                  ->orWhere('deskripsi_layanan', 'like', "%{$q}%");
+        })->get();
+
+        return view('permohonan.index', compact('layanan'));
+        // return view('permohonan.index', [
+            // 'layanan' => LayananSurat::all()
+        // ]);
     }
 
     public function create($id)
