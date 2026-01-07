@@ -20,6 +20,8 @@ class AduanMasyarakatResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-envelope-open';
     protected static ?string $navigationLabel = 'Aduan Masyarakat';
     protected static ?string $navigationGroup = 'Aduan Masyarakat';
+    protected static ?int $navigationSort = 5;
+
 
     public static function form(Form $form): Form
     {

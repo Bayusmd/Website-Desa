@@ -17,9 +17,11 @@ class InformasiDesaResource extends Resource
 {
     protected static ?string $model = InformasiDesa::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-newspaper';
+    protected static ?string $navigationIcon = 'heroicon-o-window';
     protected static ?string $navigationLabel = 'Informasi Desa';
     protected static ?string $navigationGroup = 'Informasi Desa';
+    protected static ?int $navigationSort = 1;
+
 
     public static function form(Form $form): Form
     {

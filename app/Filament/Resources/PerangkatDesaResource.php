@@ -25,6 +25,8 @@ class PerangkatDesaResource extends Resource
     protected static ?string $navigationLabel = 'Perangkat Desa';
     protected static ?string $navigationGroup = 'Perangkat Desa';
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?int $navigationSort = 10;
+
 
     public static function form(Form $form): Form
     {

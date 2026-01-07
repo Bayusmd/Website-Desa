@@ -6,40 +6,64 @@ use App\Models\PermohonanSurat;
 use Filament\Widgets\ChartWidget;
 use Carbon\Carbon;
 
+
 class PermohonanChart extends ChartWidget
 {
-
-
-    protected static ?string $heading = 'Grafik Permohonan Surat Desa Lemahbang';
+    protected static ?string $heading = null;
 
     protected function getData(): array
-        {
-            // Buat data 12 bulan terakhir
-            $labels = [];
-            $values = [];
+    {
+        $tahun = now()->year;
 
-            for ($i = 1; $i <= 12; $i++) {
-                $monthName = Carbon::create()->month($i)->format('F');
-                $labels[] = $monthName;
+        static::$heading = 'Grafik Permohonan Surat Tahun ' . $tahun;
 
-                $count = PermohonanSurat::whereMonth('tanggal_permohonan', $i)->count();
-                $values[] = $count;
-            }
+        $labels = [];
+        $values = [];
 
-            return [
-                'datasets' => [
-                    [
-                        'label' => 'Jumlah Permohonan',
-                        'data' => $values,
-                    ],
-                ],
-                'labels' => $labels,
-            ];
+        for ($bulan = 1; $bulan <= 12; $bulan++) {
+            $labels[] = \Carbon\Carbon::create()
+                ->month($bulan)
+                ->translatedFormat('F');
+
+            $values[] = PermohonanSurat::whereYear('tanggal_permohonan', $tahun)
+                ->whereMonth('tanggal_permohonan', $bulan)
+                ->count();
         }
+
+        return [
+            'datasets' => [
+                [
+                    'label' => 'Jumlah Permohonan ' . $tahun,
+                    'data' => $values,
+
+                    // 🎨 WARNA CUSTOM
+                    'borderColor' => '#2563EB',
+                    'backgroundColor' => 'rgba(37,99,235,0.25)',
+                    'pointBackgroundColor' => '#1D4ED8',
+                    'pointBorderColor' => '#1D4ED8',
+                    'tension' => 0.4,
+                    'fill' => true,
+                ],
+            ],
+            'labels' => $labels,
+        ];
+    }
 
     protected function getType(): string
-        {
-            return 'line';
-        }
+    {
+        return 'line';
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -20,6 +20,8 @@ class SyaratSuratResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-document-duplicate';
     protected static ?string $navigationLabel = 'syarat Layanan Surat';
     protected static ?string $navigationGroup = 'Layanan Surat';
+    protected static ?int $navigationSort = 6;
+
 
     public static function form(Form $form): Form
     {
@@ -27,7 +29,7 @@ class SyaratSuratResource extends Resource
             ->schema([
                 Forms\Components\Select::make('Layanan_surat_id_layanan')
                 ->label('Nama Layanan')
-                ->relationship('layanan', 'nama_layanan')  
+                ->relationship('layanan', 'nama_layanan')
                 ->searchable()
                 ->preload()
                 ->required(),

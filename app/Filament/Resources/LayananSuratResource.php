@@ -21,6 +21,8 @@ class LayananSuratResource extends Resource
     protected static ?string $navigationLabel = 'Jenis Layanan Surat';
     protected static ?string $navigationGroup = 'Layanan Surat';
     protected static ?string $navigationIcon = 'heroicon-o-clipboard';
+    protected static ?int $navigationSort = 6;
+
 
     public static function form(Form $form): Form
     {

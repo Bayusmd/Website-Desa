@@ -20,6 +20,8 @@ class PermohonanSuratResource extends Resource
     protected static ?string $navigationLabel = 'Permohonan Surat';
     protected static ?string $navigationGroup = 'Permohonan Surat';
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static ?int $navigationSort = 7;
+
 
 
 

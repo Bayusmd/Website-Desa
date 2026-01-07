@@ -19,7 +19,9 @@ class GaleriResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
     protected static ?string $navigationLabel = 'Galeri Desa';
-    protected static ?string $navigationGroup = 'Galeri Desa';
+    protected static ?string $navigationGroup = 'Informasi Desa';
+    protected static ?int $navigationSort = 4;
+
 
     public static function form(Form $form): Form
     {

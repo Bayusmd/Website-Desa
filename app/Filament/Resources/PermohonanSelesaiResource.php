@@ -31,6 +31,8 @@ class PermohonanSelesaiResource extends Resource
     protected static ?string $navigationLabel = 'Permohonan Selesai';
     protected static ?string $navigationIcon = 'heroicon-o-check-circle';
     protected static ?string $navigationGroup = 'Permohonan Surat';
+    protected static ?int $navigationSort = 8;
+
 
     public static function table(Table $table): Table
     {

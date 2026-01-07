@@ -18,8 +18,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Auth\AdminLogin;
-use App\Filament\Widgets\PermohonanSuratStats;
-use Filament\Navigation\NavigationGroup;
+
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -38,6 +38,7 @@ class AdminPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Pages\Dashboard::class,
+
             ])
             ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
 
@@ -48,7 +49,9 @@ class AdminPanelProvider extends PanelProvider
                 \App\Filament\Admin\Widgets\PermohonanChart::class,
 
             ])
+          ->profile()
           ->databaseNotifications()
+
 
 
 

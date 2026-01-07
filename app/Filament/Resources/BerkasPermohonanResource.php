@@ -19,6 +19,8 @@ class BerkasPermohonanResource extends Resource
     protected static ?string $navigationLabel = 'Berkas Permohonan Surat';
     protected static ?string $navigationGroup = 'Permohonan Surat';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?int $navigationSort = 9;
+
 
     public static function form(Form $form): Form
     {

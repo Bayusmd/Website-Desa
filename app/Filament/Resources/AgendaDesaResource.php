@@ -19,7 +19,9 @@ class AgendaDesaResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
     protected static ?string $navigationLabel = 'Agenda Desa';
-    protected static ?string $navigationGroup = 'Agenda Desa';
+    protected static ?string $navigationGroup = 'Informasi Desa';
+    protected static ?int $navigationSort = 3;
+
 
 
     public static function form(Form $form): Form
@@ -41,7 +43,7 @@ class AgendaDesaResource extends Resource
                 Forms\Components\Textarea::make('deskripsi_agenda')
                     ->placeholder('Tuliskan deskripsi agenda secara lengkap')
                     ->required()
-                    ->rows(8) 
+                    ->rows(8)
                     ->maxLength(255),
             ]);
     }

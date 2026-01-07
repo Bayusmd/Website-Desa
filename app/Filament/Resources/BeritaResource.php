@@ -17,9 +17,11 @@ class BeritaResource extends Resource
 {
     protected static ?string $model = Berita::class;
 
-    protected static ?string $navigationGroup = 'Berita Desa';
+    protected static ?string $navigationGroup = 'Informasi Desa';
     protected static ?string $navigationLabel = 'Berita Desa';
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
+    protected static ?int $navigationSort = 2;
+
 
 
     public static function form(Form $form): Form
