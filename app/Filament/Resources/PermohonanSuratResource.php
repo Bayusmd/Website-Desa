@@ -204,12 +204,14 @@ class PermohonanSuratResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+           // pengatuan agar permohonan surat berstatus baru dan proses tampil
             ->modifyQueryUsing(fn ($query) =>$query->whereIn('status_permohonan', ['baru', 'proses']))
              ->query(
+                // pengurutan permohonan surat berdasarkan tanggal permohonan yang dahulu diajukan  berdasarkan algoritma fifo
                 PermohonanSurat::query()
                     ->orderBy('tanggal_permohonan', 'asc'))
-            // ->defaultSort('status_permohonan')    // selesai paling bawah
-            // ->defaultSort('tanggal_permohonan', 'asc')    // tanggal awal → akh
+                    // ->defaultSort('status_permohonan')    // selesai paling bawah
+                    // ->defaultSort('tanggal_permohonan', 'asc')    // tanggal awal → akh
             ->columns([
                 Tables\Columns\TextColumn::make('no')
                     ->label('No')

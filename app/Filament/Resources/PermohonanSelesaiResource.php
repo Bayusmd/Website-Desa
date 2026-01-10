@@ -37,8 +37,10 @@ class PermohonanSelesaiResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+        // pengatuan agar permohonan surat berstatus selesai tampil
             ->modifyQueryUsing(fn ($query) => $query->where('status_permohonan', 'selesai'))
              ->query(
+                    // pengurutan permohonan surat berdasarkan tanggal permohonan yang dahulu diajukan  berdasarkan algoritma fifo
                     PermohonanSurat::query()
                         ->orderBy('tanggal_permohonan', 'asc'))
             ->columns([
