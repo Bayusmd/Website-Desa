@@ -464,9 +464,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     <h3 class="font-bold text-lg">
                         {{ $item->judul }}
                     </h3>
+                    
+                    <p class="text-red-500">DEBUG ID: {{ $item->Admin_id_admin }}</p>
+                    <p class="text-red-500">DEBUG RELASI: {{ $item->admin ? 'TERSAMBUNG' : 'PUTUS' }}</p>
 
                     <p class="text-sm text-gray-500 mt-1">
-                        {{ $item->admin->nama_admin 'Admin Lemahbang' }} •
+                        {{ $item->admin?->nama_admin ?? 'Admin Lemahbang' }} •
                         {{ $item->created_at->format('d M Y') }}
                     </p>
 
