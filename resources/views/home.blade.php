@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     </h3>
 
                     <p class="text-sm text-gray-500 mt-1">
-                        {{ $item->admin->name }} •
+                        {{ $item->admin?->name ?? 'Admin Lemahbang' }} •
                         {{ $item->created_at->format('d M Y') }}
                     </p>
 

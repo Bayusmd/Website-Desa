@@ -16,7 +16,7 @@ class HomeController extends Controller
         $kepalaDesa = PerangkatDesa::where('jabatan', 'Kepala Desa')->first();
         $perangkatPreview = PerangkatDesa::limit(4)->get();
         $galeri = Galeri::latest()->get();
-        $beritas = Berita::latest()->take(3)->get();
+        $beritas = Berita::with('admin')->latest()->take(3)->get();
 
 
 
