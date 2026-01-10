@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Berita extends Model
 {
     protected $fillable = [
-         'Admin_id_admin',
+        'Admin_id_admin',
         'judul',
         'isi',
         'foto'
