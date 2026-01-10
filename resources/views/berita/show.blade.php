@@ -9,7 +9,7 @@
     <h1 class="text-4xl font-bold mb-4">{{ $berita->judul }}</h1>
 
     <p class="text-gray-500 mb-6">
-        {{ $berita->admin?->nama_admin ?? }} •
+        {{ $berita->admin?->nama_admin 'Admin Lemahbang' ?? }} •
         {{ $berita->created_at->format('d M Y') }}
     </p>
 
