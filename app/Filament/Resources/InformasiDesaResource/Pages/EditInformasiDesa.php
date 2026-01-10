@@ -9,18 +9,18 @@ use Filament\Resources\Pages\EditRecord;
 class EditInformasiDesa extends EditRecord
 {
     protected static string $resource = InformasiDesaResource::class;
-    protected function mutateFormDataBeforeSave(array $data): array
-    {
+    // protected function mutateFormDataBeforeSave(array $data): array
+    // {
         // Jika pengguna mengganti gambar → FileUpload memberikan path baru
-        if (!empty($data['gambar'])) {
-            $data['gambar'] = basename($data['gambar']);
-        } else {
+        // if (!empty($data['gambar'])) {
+            // $data['gambar'] = basename($data['gambar']);
+        // } else {
             // Jika tidak diganti → gunakan gambar lama
-            $data['gambar'] = $this->record->gambar;
-        }
+            // $data['gambar'] = $this->record->gambar;
+        // }
 
-        return $data;
-    }
+        // return $data;
+    // }
 
 
 
