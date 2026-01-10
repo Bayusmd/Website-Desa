@@ -9,13 +9,13 @@ class BeritaController extends Controller
 {
      public function index()
     {
-        $beritas = Berita::latest()->paginate(6);
+        $beritas = Berita::with('admin')->latest()->paginate(6);
         return view('berita.index', compact('beritas'));
     }
 
     public function show($id)
     {
-        $berita = Berita::findOrFail($id);
+        $berita = Berita::with('admin')->findOrFail($id);
         return view('berita.show', compact('berita'));
     }
 }
