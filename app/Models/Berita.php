@@ -15,7 +15,7 @@ class Berita extends Model
 
     public function admin()
     {
-        return $this->belongsTo(Admin::class, 'id');
+        return $this->belongsTo(Admin::class, 'Admin_id_admin', 'id');
 
     }
 }
