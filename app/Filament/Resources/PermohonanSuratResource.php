@@ -92,6 +92,7 @@ class PermohonanSuratResource extends Resource
                 Forms\Components\TextInput::make('alamat_pemohon')
                     ->label('Alamat Pemohon')
                     ->placeholder('Masukkan alamat lengkap (Dusun, RT/RW)')
+                    ->maxLength(45)
                     ->required()
                     ->helperText('Contoh: Dusun Patih RT 01 / RW 01'),
 
