@@ -46,6 +46,7 @@ class PermohonanSuratController extends Controller
                     'required',
                     'string',
                     'min:3',
+                    'max:45',
                     'max:100',
                     'regex:/^[a-zA-Z\s\.\']+$/'
                     ],
@@ -53,7 +54,9 @@ class PermohonanSuratController extends Controller
                 'required',
                 'numeric',
                 'digits:16'],
-            'alamat_pemohon' => 'required',
+            'alamat_pemohon' =>
+                'required',
+                'max:45',
             'no_whatsapp' => [
                     'required',
                     'regex:/^(08|628)[0-9]{9,15}$/'
@@ -71,12 +74,14 @@ class PermohonanSuratController extends Controller
 
             'nama_pemohon.required' => 'Nama pemohon wajib diisi.',
             'nama_pemohon.min' => 'Nama pemohon minimal 3 karakter.',
-            'nama_pemohon.max' => 'Nama pemohon maksimal 100 karakter.',
+            'nama_pemohon.max' => 'Nama pemohon maksimal 45 karakter.',
             'nama_pemohon.regex' => 'Nama hanya boleh berisi huruf dan spasi.',
 
             'email_pemohon.required' => 'Email pemohon wajib diisi.',
             'email_pemohon.email' => 'Format email tidak valid.',
             'email_pemohon.max' => 'Email maksimal 100 karakter.',
+
+            'alamat_pemohon.max' => 'Alamat pemohon maksimal 45 karakter.',
 
             'no_whatsapp.required' => 'Nomor WhatsApp wajib diisi.',
             'no_whatsapp.regex' => 'Nomor WhatsApp harus diawali 08 atau 628 dan hanya angka.',

@@ -67,7 +67,8 @@ class PermohonanSuratResource extends Resource
                     ->required()
                     ->label('Nama Pemohon')
                     ->placeholder('Masukkan nama lengkap pemohon')
-                    ->minLength(3) // Validasi minimal 3 karakter
+                    ->minLength(3)
+                    ->maxLength(45) // Validasi minimal 3 karakter
                     ->regex('/^[a-zA-Z\s]*$/') // Hanya huruf (a-z, A-Z) dan spasi (\s)
                     ->validationMessages([
                         'regex' => 'Nama pemohon hanya boleh berisi huruf dan spasi.',

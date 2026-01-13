@@ -72,6 +72,7 @@
                 <input type="text" required name="nama_pemohon"
                     value="{{ old('nama_pemohon') }}"
                     minlength="3"
+                    maxlength="45"
                     pattern="[A-Za-z\s]+"
                     title="Nama Pemohon minimal berisi 3 karakter dan hanya boleh berisi huruf dan spasi"
                     placeholder="Masukkan Nama Lengkap Anda"
@@ -87,6 +88,7 @@
                 <label class="block font-medium mb-1">Alamat Pemohon</label>
                 <textarea name="alamat_pemohon" rows="3"
                         required
+                        maxlength="45"
                         value="{{ old('alamat_pemohon') }}"
                         title="Masukkan Alamat Anda (Nama Dusun RT/RW)"
                         placeholder="Masukkan Alamat Anda (Nama Dusun dan RT/RW)"
