@@ -66,9 +66,10 @@ class PermohonanSuratController extends Controller
                     'email',
                     'max:100'
                 ],
+            'berkas'   => ['required', 'array'],
             'berkas.*' => 'required|file|mimes:jpg,jpeg,png|max:2048'
             ],
-         [
+         [ // CUSTOM MESSAGES
             'nik_pemohon.digits' => 'NIK harus berjumlah 16 digit.',
             'nik_pemohon.required' => 'NIK harus di isi dan  berjumlah 16 digit.',
 
@@ -88,7 +89,7 @@ class PermohonanSuratController extends Controller
 
             'berkas.*.max'       => 'Ukuran file tidak boleh lebih dari 2MB.',
             'berkas.*.mimes'     => 'Hanya file gambar (JPG, JPEG, PNG) yang diperbolehkan!',
-            'berkas.*.required'       => 'Harus menggunggah File yang diminta.'
+            'berkas.*.required'  => 'Harus menggunggah File yang diminta.'
         ]);
 
         $permohonan = PermohonanSurat::create([
