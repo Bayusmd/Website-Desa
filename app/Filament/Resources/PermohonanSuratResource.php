@@ -105,7 +105,7 @@ class PermohonanSuratResource extends Resource
                     ->rule('regex:/^(08|628)[0-9]{9,15}$/')
                     ->validationMessages([
                         'required' => 'Nomor WhatsApp wajib diisi.',
-                        'regex'    => 'Gunakan format 08xxxxxxxxxx atau 628xxxxxxxxxx.minimal 9 nomor maksimal 15 nomor',
+                        'regex'    => 'harus berupa angka dengan format 08xx atau 628xx. Min 9 dan Max 15 angka',
                     ])
                     ->helperText('Gunakan format 08xxxxxxxxxx atau 628xxxxxxxxxx'),
 
