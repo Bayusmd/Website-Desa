@@ -86,6 +86,7 @@ class PermohonanSuratResource extends Resource
                         'required' => 'NIK wajib diisi.',
                         'numeric'  => 'NIK hanya boleh berisi angka.',
                         'length'   => 'NIK harus terdiri dari 16 digit.',
+                        'digits'   => 'NIK harus terdiri dari 16 digit.',
                         'regex'    => 'Format NIK tidak valid.',
                     ]),
 
