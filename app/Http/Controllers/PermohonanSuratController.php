@@ -54,13 +54,13 @@ class PermohonanSuratController extends Controller
                 'required',
                 'numeric',
                 'digits:16'],
-            'alamat_pemohon' =>
+            'alamat_pemohon' => [
                 'required',
-                'max:45',
+                'max:45'],
             'no_whatsapp' => [
                     'required',
                     'regex:/^(08|628)[0-9]{9,15}$/'
-        ],
+                ],
              'email_pemohon' => [
                     'required',
                     'email',
