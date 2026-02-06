@@ -159,6 +159,9 @@ class PermohonanSuratResource extends Resource
                             ->required()
                             ->maxSize(2048)
                                // Placeholder / keterangan
+                            ->validationMessages([
+                                'required' => 'gambar wajib diupload.'
+                            ])
                             ->helperText('Unggah foto dalam format PNG, JPG, atau JPEG. Maksimal 2 MB.')
                             // Validasi tipe file
                             ->acceptedFileTypes([
