@@ -26,20 +26,20 @@ class BerkasPermohonanResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_berkas')
-                    ->required()
-                    ->maxLength(20),
-                Forms\Components\FileUpload::make('file_path')
-                    ->disk('public')
-                    ->directory('berkas-permohonan')
-                    ->preserveFilenames()
-                    ->visibility('public')
-                    ->imageEditor()
-                    ->image()
-                    ->required(false) // ⬅️ TIDAK WAJIB upload ulang
-                    ->helperText('Biarkan kosong jika tidak ingin mengganti file'),
-                Forms\Components\DatePicker::make('tanggal_upload_berkas')
-                    ->required(),
+                // Forms\Components\TextInput::make('nama_berkas')
+                    // ->required()
+                    // ->maxLength(20),
+                // Forms\Components\FileUpload::make('file_path')
+                    // ->disk('public')
+                    // ->directory('berkas-permohonan')
+                    // ->preserveFilenames()
+                    // ->visibility('public')
+                    // ->imageEditor()
+                    // ->image()
+                    // ->required(false) // ⬅️ TIDAK WAJIB upload ulang
+                    // ->helperText('Biarkan kosong jika tidak ingin mengganti file'),
+                // Forms\Components\DatePicker::make('tanggal_upload_berkas')
+                    // ->required(),
 
 
 
@@ -53,9 +53,10 @@ class BerkasPermohonanResource extends Resource
                 Tables\Columns\TextColumn::make('no')
                     ->label('No')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('layanan.nama_layanan')
-                    ->label('Nama Layanan')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('Permohonan_surat_id_permohonan')
+                    ->label('Id Permohonan')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('permohonan.nama_pemohon')
                     ->label('Nama Pemohon')
                     ->searchable(),
