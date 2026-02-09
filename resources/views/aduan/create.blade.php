@@ -40,13 +40,13 @@
                 transition duration-300 hover:shadow-xl">
 
 
-       
-       
-       
-       
-       
-       
-       
+
+
+
+
+
+
+
 
         {{-- Judul --}}
         <div class="text-center mb-8">
@@ -75,12 +75,14 @@
                                focus:border-blue-500
                                transition duration-200">
                     <option value="">-- Pilih Kategori --</option>
-                    <option value="Infrastruktur">Infrastruktur</option>
-                    <option value="Lingkungan">Lingkungan</option>
-                    <option value="Pelayanan Publik">Pelayanan Publik</option>
-                    <option value="Keamanan">Keamanan</option>
-                    <option value="Keuangan">Keuangan</option>
-                    <option value="Lainnya">Lainnya</option>
+                    <option value="infrastruktur">Infrastruktur</option>
+                    <option value="pemerintahan">Pemerintahan</option>
+                    <option value="lingkungan">Lingkungan</option>
+                    <option value="kesehatan">Kesehatan</option>
+                    <option value="keamanan">Keamanan</option>
+                    <option value="pelayanan">Pelayanan</option>
+                    <option value="keuangan">Keuangan</option>
+                    <option value="lainnya">Lainnya</option>
                 </select>
             </div>
 

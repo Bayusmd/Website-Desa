@@ -29,18 +29,31 @@ class AduanMasyarakatResource extends Resource
             ->schema([
                 Forms\Components\Hidden::make('Admin_id_admin')
                     ->default(fn () => auth('admin')->id()),
-                Forms\Components\Select::make('kategori_aduan')
-                    ->options([
-                            'infrastruktur' => 'Infrastruktur',
-                            'pemerintahan' => 'Pemerintahan',
-                            'kesehatan' => 'Kesehatan',
-                            'kambitbmas' => 'Kamtibmas',
-                            'pelayanan' => 'Pelayanan',
-                            'lain-lain' => 'Lain-lain',
-                        ])
+                Forms\Components\TextInput::make('kategori_aduan')
+
+                    ->readOnly() // TextInput mendukung metode ini
+                    ->formatStateUsing(fn ($state) => match($state) {
+                        'infrastruktur' => 'Infrastruktur',
+                        'pemerintahan' => 'Pemerintahan',
+                        'lingkungan' => 'Lingkungan',
+                        'kesehatan' => 'Kesehatan',
+                        'keamanan' => 'Keamanan',
+                        'pelayanan' => 'Pelayanan',
+                        'keuangan' => 'Keuangan',
+                        'lainnya' => 'Lainnya',
+                        default => $state,
+                    }),
+                    // ->options([
+                            // 'infrastruktur' => 'Infrastruktur',
+                            // 'pemerintahan' => 'Pemerintahan',
+                            // 'kesehatan' => 'Kesehatan',
+                            // 'kambitbmas' => 'Kamtibmas',
+                            // 'pelayanan' => 'Pelayanan',
+                            // 'lain-lain' => 'Lain-lain',
+                        // ])
                     // ->disabled()
                     // ->dehydrated(true)
-                    ->readOnly(),
+                    // ->readOnly(),
                 Forms\Components\TextInput::make('deskripsi_aduan')
                     ->required()
                     ->maxLength(255)
