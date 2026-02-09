@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PermohonanSelesaiResource\Pages;
 use App\Filament\Resources\PermohonanSelesaiResource\RelationManagers;
+use App\Models\SyaratSurat;
 use App\Models\PermohonanSurat;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -17,13 +18,13 @@ class PermohonanSelesaiResource extends Resource
 {
 
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                //
-            ]);
-    }
+    // public static function form(Form $form): Form
+    // {
+        // return $form
+            // ->schema([
+
+            // ]);
+    // }
     protected static ?string $model = PermohonanSurat::class;
 
     protected static ?string $title = 'Daftar Permohonan Surat Selesai';
@@ -33,7 +34,160 @@ class PermohonanSelesaiResource extends Resource
     protected static ?string $navigationGroup = 'Permohonan Surat';
     protected static ?int $navigationSort = 8;
 
-
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                /*
+                |--------------------------------------------------------------------------
+                | PILIH LAYANAN
+                |--------------------------------------------------------------------------
+                */
+                Forms\Components\Select::make('Layanan_surat_id_layanan')
+                    ->label('Pilih Layanan')
+                    ->relationship('layanan', 'nama_layanan')
+                    ->searchable()
+                    ->preload()
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set) {
+                        // Ambil syarat berdasarkan layanan
+                        $syarat = SyaratSurat::where('Layanan_surat_id_layanan', $state)
+                            ->get()
+                            ->map(fn ($item) => [
+                                'nama_berkas' => $item->nama_syarat,
+                                'file' => null,
+                            ])
+                            ->toArray();
+                        $set('berkas_syarat', $syarat);
+                    }),
+                /*
+                |--------------------------------------------------------------------------
+                | DATA PEMOHON
+                |--------------------------------------------------------------------------
+                */
+                Forms\Components\TextInput::make('nama_pemohon')
+                    ->required()
+                    ->label('Nama Pemohon')
+                    ->placeholder('Masukkan nama lengkap pemohon')
+                    ->minLength(3)
+                    ->maxLength(45) // Validasi minimal 3 karakter
+                    ->regex('/^[a-zA-Z\s]*$/') // Hanya huruf (a-z, A-Z) dan spasi (\s)
+                    ->validationMessages([
+                        'regex' => 'Nama pemohon hanya boleh berisi huruf dan spasi.',
+                        'min' => 'Nama pemohon minimal harus 3 karakter.',
+                    ]),
+                Forms\Components\TextInput::make('nik_pemohon')
+                    ->required()
+                    ->label('NIK Pemohon')
+                    ->numeric()
+                    ->length(16)
+                    ->placeholder('Masukkan NIK (16 digit)')
+                    ->rule('regex:/^[0-9]{16}$/')
+                    ->validationMessages([
+                        'required' => 'NIK wajib diisi.',
+                        'numeric'  => 'NIK hanya boleh berisi angka.',
+                        'length'   => 'NIK harus terdiri dari 16 digit.',
+                        'digits'   => 'NIK harus terdiri dari 16 digit.',
+                        'regex'    => 'Format NIK tidak valid.',
+                    ]),
+                Forms\Components\TextInput::make('alamat_pemohon')
+                    ->label('Alamat Pemohon')
+                    ->placeholder('Masukkan alamat lengkap (Dusun, RT/RW)')
+                    ->maxLength(45)
+                    ->required()
+                    ->helperText('Contoh: Dusun Patih RT 01 / RW 01'),
+                Forms\Components\TextInput::make('no_whatsapp')
+                    ->required()
+                    ->label('No Whatsapp Pemohon')
+                    ->tel()
+                    ->placeholder('Contoh: 081234567890')
+                    ->rule('regex:/^(08|628)[0-9]{9,15}$/')
+                    ->validationMessages([
+                        'required' => 'Nomor WhatsApp wajib diisi.',
+                        'regex'    => 'harus berupa angka dengan format 08xx atau 628xx. Min 9 dan Max 15 angka',
+                    ])
+                    ->helperText('Gunakan format 08xxxxxxxxxx atau 628xxxxxxxxxx'),
+                Forms\Components\TextInput::make('email_pemohon')
+                    ->label('Email Pemohon')
+                    ->email()
+                    ->required()
+                    ->placeholder('contoh@gmail.com')
+                    ->maxLength(50)
+                    ->helperText('Masukkan alamat email aktif')
+                    ->validationMessages([
+                        'required' => 'Email wajib diisi.',
+                        'email'    => 'Format email tidak valid.',
+                        'max'      => 'Email maksimal 50 karakter.',
+                    ])
+                    // Hindari spasi di awal/akhir
+                    ->dehydrateStateUsing(fn ($state) => trim($state)),
+                Forms\Components\DateTimePicker::make('tanggal_permohonan')
+                    ->default(now())
+                    ->helperText('Tanggal dan waktu permohonan dibuat')
+                    ->required(),
+                Forms\Components\Select::make('status_permohonan')
+                    ->options([
+                        'baru' => 'Baru',
+                        'proses' => 'Diproses',
+                        'selesai' => 'Selesai',
+                    ])
+                    ->default('baru'),
+                 /*
+                |--------------------------------------------------------------------------
+                | UPLOAD FILE PER SYARAT (DINAMIS)
+                |--------------------------------------------------------------------------
+                */
+                Forms\Components\Repeater::make('berkas_syarat')
+                    ->schema([
+                        Forms\Components\TextInput::make('nama_berkas')
+                            ->disabled(),
+                        Forms\Components\FileUpload::make('file')
+                            ->label('Upload File')
+                            ->disk('public')
+                            ->directory('berkas-permohonan')
+                            ->preserveFilenames()
+                            ->visibility('public')
+                            ->imageEditor()
+                            ->required()
+                            ->maxSize(2048)
+                               // Placeholder / keterangan
+                            ->validationMessages([
+                                'required' => 'gambar wajib diupload.'
+                            ])
+                            ->helperText('Unggah foto dalam format PNG, JPG, atau JPEG. Maksimal 2 MB.')
+                            // Validasi tipe file
+                            ->acceptedFileTypes([
+                                'image/png',
+                                'image/jpg',
+                                'image/jpeg',
+                            ])
+                            ->getUploadedFileNameForStorageUsing(function ($file) {
+                                return $file->getClientOriginalName();
+                            })
+                             ->storeFileNamesIn('file_path')
+                             ->default(function ($record, $context) {
+                                    if ($context !== 'edit' || !$record) return null;
+                                    // Jika record punya relasi 'berkas'
+                                    if (!isset($record->berkas)) return null;
+                                    // Cari berkas berdasarkan nama syarat
+                                    $item = $record->berkas->firstWhere('nama_berkas', request()->query('item'));
+                                    if (!$item) return null;
+                                    return 'berkas-permohonan/' . $item->file_path;
+                                })
+                            ->afterStateUpdated(function ($state, callable $set) {
+                                // Pastikan hanya string yang masuk
+                                if (is_array($state)) {
+                                    $state = $state[0];
+                                }
+                                $set('file_path', $state);
+                            }),
+                        Forms\Components\Hidden::make('file_path'),
+                    ])
+                    ->default([])
+                    ->columns(1)
+            ]);
+    }
     public static function table(Table $table): Table
     {
         return $table
