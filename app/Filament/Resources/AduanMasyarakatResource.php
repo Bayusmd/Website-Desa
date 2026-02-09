@@ -38,8 +38,9 @@ class AduanMasyarakatResource extends Resource
                             'pelayanan' => 'Pelayanan',
                             'lain-lain' => 'Lain-lain',
                         ])
-                    ->disabled()
-                    ->dehydrated(true),
+                    // ->disabled()
+                    // ->dehydrated(true)
+                    ->readOnly(),
                 Forms\Components\TextInput::make('deskripsi_aduan')
                     ->required()
                     ->maxLength(255)
