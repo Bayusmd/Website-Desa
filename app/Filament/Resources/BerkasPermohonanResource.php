@@ -26,9 +26,6 @@ class BerkasPermohonanResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('Permohonan_surat_id_permohonan')
-                    ->required()
-                    ->numeric(),
                 Forms\Components\TextInput::make('nama_berkas')
                     ->required()
                     ->maxLength(20),
@@ -56,10 +53,9 @@ class BerkasPermohonanResource extends Resource
                 Tables\Columns\TextColumn::make('no')
                     ->label('No')
                     ->rowIndex(),
-                Tables\Columns\TextColumn::make('Permohonan_surat_id_permohonan')
-                    ->label('Id Permohonan')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('layanan.nama_layanan')
+                    ->label('Nama Layanan')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('permohonan.nama_pemohon')
                     ->label('Nama Pemohon')
                     ->searchable(),
