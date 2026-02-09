@@ -80,11 +80,26 @@ class PermohonanSelesaiResource extends Resource
                                 // Buat URL aman menggunakan rawurlencode hanya pada nama file
                                 $url = asset('storage/berkas-permohonan/' . rawurlencode($path));
                                 // Tampilkan link
-                                return "<a href=\"{$url}\"
-                                            target=\"_blank\"
-                                            class=\"text-blue-600 underline\">
-                                            {$name}
-                                        </a>";
+                                return
+                                    "
+                                         <div class=\"flex items-center gap-3\">
+                                             <!-- Preview -->
+                                             <a href=\"{$url}\"
+                                                target=\"_blank\"
+                                                class=\"text-blue-600 hover:text-blue-800 underline \">
+                                                👁 Preview
+                                             </a>
+                                             <!-- Download -->
+                                             <a href=\"{$url}\"
+                                                download
+                                                class=\"text-green-600 hover:text-green-800 underline\">
+                                                ⬇ Download
+                                             </a>
+                                             <span class=\"text-gray-500 text-xs\">
+                                                 ({$name})
+                                             </span>
+                                         </div>
+                                    ";
                             })->implode('<br>');
                         })
                         ->html(),
