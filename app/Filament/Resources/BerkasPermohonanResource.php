@@ -93,7 +93,7 @@ class BerkasPermohonanResource extends Resource
         return [
             'index' => Pages\ListBerkasPermohonans::route('/'),
             'create' => Pages\CreateBerkasPermohonan::route('/create'),
-            'edit' => Pages\EditBerkasPermohonan::route('/{record}/edit'),
+            // 'edit' => Pages\EditBerkasPermohonan::route('/{record}/edit'),
         ];
     }
 
