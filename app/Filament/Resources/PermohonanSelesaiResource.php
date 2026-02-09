@@ -40,9 +40,9 @@ class PermohonanSelesaiResource extends Resource
         // pengatuan agar permohonan surat berstatus selesai tampil
             ->modifyQueryUsing(fn ($query) => $query->where('status_permohonan', 'selesai'))
              ->query(
-                    // pengurutan permohonan surat berdasarkan tanggal permohonan yang dahulu diajukan  berdasarkan algoritma fifo
+                    // pengurutan permohonan surat berdasarkan tanggal permohonan yang terbaru dan telas selesai di proses
                     PermohonanSurat::query()
-                        ->orderBy('tanggal_permohonan', 'asc'))
+                        ->orderBy('tanggal_permohonan', 'desc'))
             ->columns([
                 Tables\Columns\TextColumn::make('no')
                     ->label('No')
