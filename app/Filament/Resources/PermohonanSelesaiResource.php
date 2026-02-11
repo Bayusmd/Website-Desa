@@ -262,6 +262,7 @@ class PermohonanSelesaiResource extends Resource
             ->filters([
                 //
             ])
+            ->recordUrl(null)
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

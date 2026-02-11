@@ -298,9 +298,29 @@ class PermohonanSuratResource extends Resource
 
 
             ])
+            // ->actions([
+                // Tables\Actions\EditAction::make(),
+            // ]);
+            ->recordUrl(null)
+
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->disabled(function ($record) {
+                        return \App\Models\PermohonanSurat::where('tanggal_permohonan', '<', $record->tanggal_permohonan)
+                            ->where('status_permohonan', '!=', 'selesai')
+                            ->exists();
+                    })
+                    ->tooltip(function ($record) {
+                        $blocked = \App\Models\PermohonanSurat::where('tanggal_permohonan', '<', $record->tanggal_permohonan)
+                            ->where('status_permohonan', '!=', 'selesai')
+                            ->exists();
+
+                        return $blocked
+                            ? 'Tidak bisa edit karena masih ada permohonan lebih lama yang belum selesai'
+                            : null;
+                    }),
             ]);
+
     }
 
     public static function getPages(): array

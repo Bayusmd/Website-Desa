@@ -76,4 +76,19 @@ class EditPermohonanSurat extends EditRecord
             }
         }
     }
+    protected function authorizeAccess(): void
+    {
+        parent::authorizeAccess();
+    
+        $record = $this->record;
+    
+        $blocked = \App\Models\PermohonanSurat::where('tanggal_permohonan', '<', $record->tanggal_permohonan)
+            ->where('status_permohonan', '!=', 'selesai')
+            ->exists();
+    
+        if ($blocked) {
+            abort(403, 'Tidak bisa mengedit karena masih ada permohonan lebih lama yang belum selesai.');
+        }
+    }
+
 }
