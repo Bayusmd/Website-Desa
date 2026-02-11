@@ -15,21 +15,21 @@ class PermohonanTrackingController extends Controller
     public function search()
     {
         request()->validate([
-            'nik' => 'required|numeric|digits:16'
-        ],
-    [
-        'nik.digits' => 'NIK harus berjumlah 16 digit.',
-         'nik.required' => 'NIK harus di isi dan  berjumlah 16 digit.'
-    ]);
+            'id_permohonan' => 'required|digits_between:1,20'
+        ], [
+            'id_permohonan.required' => 'ID harus diisi.',
+            'id_permohonan.digits_between' => 'ID harus berupa angka dan maksimal 20 digit.'
+        ]);
+
 
         $permohonan = PermohonanSurat::with('layanan', 'berkas')
-            ->where('nik_pemohon', request('nik'))
+            ->where('id_permohonan', request('id_permohonan'))
             ->orderBy('tanggal_permohonan', 'DESC')
             ->get();
 
         return view('permohonan.riwayat', [
             'data' => $permohonan,
-            'nik' => request('nik')
+            'id_permohonan' => request('id_permohonan')
         ]);
     }
 }

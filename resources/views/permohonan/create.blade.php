@@ -19,7 +19,7 @@
                      Berhasil!
                  </h2>
                  <p class="text-gray-600 mb-6">
-                     {{ session('success') }}
+                     {!! session('success') !!}
                  </p>
                  <button
                      @click="open = false"

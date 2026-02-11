@@ -139,7 +139,10 @@ class PermohonanSuratController extends Controller
             ->sendToDatabase($admin); }
         return redirect()
             ->back()
-            ->with('success', 'Permohonan surat berhasil diajukan! silahkan tunggu proses selesai, anda dapat mengeceknya melalui halaman status permohonan.');
+            ->with('success', 'Permohonan surat berhasil diajukan!<br><br>
+        Silahkan tunggu proses selesai.<br>
+        Anda dapat mengeceknya melalui halaman status permohonan.<br><br>
+        ID Permohonan Anda adalah : <strong>' . $permohonan->id_permohonan . '</strong>');
     }
 
 

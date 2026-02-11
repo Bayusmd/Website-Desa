@@ -51,6 +51,13 @@ Route::get('/agenda/{id}', [AgendaController::class, 'show'])->name('agenda.show
 // =====================
 Route::get('/aduan', [AduanController::class, 'create'])->name('aduan.create');
 Route::post('/aduan', [AduanController::class, 'store'])->name('aduan.store');
+use App\Http\Controllers\AduanTrackingController;
+
+// =============================
+//     ADUAN MASYARAKAT Tracking
+// =============================
+Route::get('/riwayat-aduan', [AduanTrackingController::class, 'index'])->name('aduan.riwayat');
+Route::post('/riwayat-aduan/search', [AduanTrackingController::class, 'search'])->name('aduan.riwayat.search');
 
 // =====================
 //   PERMOHONAN SURAT

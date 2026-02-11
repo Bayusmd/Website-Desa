@@ -51,6 +51,11 @@ class AduanController extends Controller
 
         return redirect()
             ->route('aduan.create')
-            ->with('success', 'Aduan berhasil dikirim! Terima kasih atas partisipasi Anda.');
+            ->with('success', 'Aduan berhasil dikirim!<br><br>
+                    Terima kasih atas partisipasi Anda.<br>
+                    Silahkan ditunggu aduan anda ditindaklanjuti.<br>
+                    Anda dapat mengeceknya di Lihat Status Aduan.<br><br>
+                    ID Aduan Anda adalah : <strong>' .$aduan->id_aduan . '</strong>');
+
     }
 }

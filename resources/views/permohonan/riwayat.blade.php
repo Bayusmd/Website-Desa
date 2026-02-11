@@ -13,17 +13,17 @@
         @csrf
 
         <label class="block mb-2 font-semibold">
-            Masukkan NIK Anda
+            Masukkan ID Permohonan Anda
         </label>
 
-        <input type="text" name="nik"
+        <input type="text" name="id_permohonan"
                class="w-full border px-4 py-2 rounded-lg focus:ring focus:ring-blue-200"
-               placeholder="Contoh: 3275010201010001"
+               placeholder="Contoh: 25"
                required
-               minlength="16"
-               maxlength="16"
-               title="NIK harus berupa 16 digit angka"
-               pattern="[0-9]{16}">
+               maxlength="20"
+               title="ID Hanya berisi angka tanpa tanda minus atau koma"
+               pattern="[0-9]+"
+               inputmode="numeric">
 
         <button class="mt-4 bg-gray-600 hover:bg-gray-700
                        text-white px-6 py-2 rounded-lg transition">
@@ -34,7 +34,7 @@
     {{-- Hasil --}}
     @isset($data)
         <h3 class="text-xl font-bold mb-4">
-            Hasil Pencarian untuk NIK: {{ $nik }}
+            Hasil Pencarian untuk ID Permohonan: {{ $id_permohonan }}
         </h3>
 
         @if ($data->isEmpty())
@@ -70,6 +70,12 @@
                         </span>
                     </div>
 
+                    {{-- Info pemohon --}}
+                    <p class="text-sm text-gray-600 mb-3">
+                        <strong>Nama Pemohon:</strong>
+                        {{ ($item->nama_pemohon) }}
+                    </p>
+
                     {{-- Info --}}
                     <p class="text-sm text-gray-600 mb-3">
                         <strong>Tanggal Permohonan:</strong>
@@ -82,7 +88,7 @@
                         <ul class="list-disc ml-6 text-sm">
                             @foreach ($item->berkas as $b)
                                 <li>
-                                    <a class="text-blue-600">
+                                    <a class="text-black-600">
                                         {{ $b->nama_berkas }}
                                     </a>
                                 </li>
