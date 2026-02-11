@@ -304,6 +304,8 @@ class PermohonanSuratResource extends Resource
             ->recordUrl(null)
 
             ->actions([
+                // mematikan tombol edit ketika data permohonan yang lama belum bestatus selesai
+                // mengaktifkan keseluruhan algoritma fifo
                 Tables\Actions\EditAction::make()
                     ->disabled(function ($record) {
                         return \App\Models\PermohonanSurat::where('tanggal_permohonan', '<', $record->tanggal_permohonan)
