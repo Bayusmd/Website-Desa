@@ -11,8 +11,10 @@ use App\Jobs\KirimWaPermohonanSelesai;
 use \App\Models\SyaratSurat;
 use Filament\Notifications\Actions\Action;
 use Filament\Notifications\Notification;
+use Illuminate\Support\Facades\Http;
 use App\Models\Admin;
 use App\Filament\Resources\PermohonanSuratResource;
+use Illuminate\Support\Facades\Log;
 
 class PermohonanSuratController extends Controller
 {
@@ -137,6 +139,41 @@ class PermohonanSuratController extends Controller
                       ->button()
                       ->markAsRead(),])
             ->sendToDatabase($admin); }
+        // ===============================
+        // KIRIM WHATSAPP KE PEMOHON
+        // ===============================
+        try {
+
+            $token = env('FONNTE_TOKEN');
+
+            // Format nomor 08xxx menjadi 628xxx
+            $nomor = preg_replace('/^0/', '62', $permohonan->no_whatsapp);
+            $layanan = optional($permohonan->layanan)->nama_layanan ?? 'Surat';
+            $tanggal = \Carbon\Carbon::parse($permohonan->tanggal_permohonan)
+                ->translatedFormat('d F Y H:i');
+             $pesan = "Halo {$permohonan->nama_pemohon},\n\n"
+                . "Permohonan surat Anda telah *BERHASIL* diajukan.\n\n"
+                . "Detail Permohonan:\n"
+                . "Nama: *{$permohonan->nama_pemohon}*\n"
+                . "Layanan: *{$layanan}*\n"
+                . "Tanggal Diajukan: *{$tanggal}*\n"
+                . "ID Permohonan: *{$permohonan->id_permohonan}*\n\n"
+                . "Mohon menunggu proses permohonan selesai.\n"
+                . "Kami akan mengonfirmasi kembali apabila surat telah selesai.\n\n"
+                . "Terima kasih.\n\n"
+                . "Hormat Kami Pemerintah Desa Lemahbang.";
+
+            Http::withHeaders([
+                'Authorization' => $token
+            ])->asForm()->post('https://api.fonnte.com/send', [
+                'target' => $nomor,
+                'message' => $pesan,
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Gagal kirim WA: ' . $e->getMessage());
+        }
+
         return redirect()
             ->back()
             ->with('success', 'Permohonan surat berhasil diajukan!<br><br>
@@ -144,7 +181,6 @@ class PermohonanSuratController extends Controller
         Anda dapat mengeceknya melalui halaman status permohonan.<br><br>
         ID Permohonan Anda adalah : <strong>' . $permohonan->id_permohonan . '</strong>');
     }
-
 
 
 }

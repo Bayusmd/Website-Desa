@@ -12,6 +12,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Symfony\Contracts\Service\Attribute\Required;
+use Illuminate\Support\Facades\Log;
+
 
 class PermohonanSuratResource extends Resource
 {
@@ -321,6 +323,9 @@ class PermohonanSuratResource extends Resource
                             ? 'Tidak bisa edit karena masih ada permohonan lebih lama yang belum selesai'
                             : null;
                     }),
+
+
+
             ]);
 
     }

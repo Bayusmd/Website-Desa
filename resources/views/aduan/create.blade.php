@@ -7,7 +7,7 @@
         {{-- Tombol --}}
         <div class="flex justify-end mb-4">
             <a href="{{ route('aduan.riwayat') }}"
-               class="bg-gray-600 hover:bg-gray-700 font-semibold
+               class="bg-green-600 hover:bg-green-700 font-semibold
                       text-white text-sm px-4 py-2
                       rounded-lg shadow transition">
                 Lihat Status Aduan
@@ -119,7 +119,7 @@
             {{-- Tombol --}}
             <div class="pt-4 text-center">
                 <button type="submit"
-                        class="bg-gray-600 hover:bg-gray-700
+                        class="bg-green-600 hover:bg-green-700
                                text-white font-semibold
                                px-6 py-2 rounded-lg
                                transition duration-300

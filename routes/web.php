@@ -91,6 +91,10 @@ Route::get('/api/penduduk', [PendudukController::class, 'index']);
 Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
 Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
 
+// =====================
+//    ROUTE Kirim Wa
+// =====================
+Route::get('/permohonan/{id}/selesai', [PermohonanSuratController::class, 'updateStatus'])->name('permohonan.selesai');
 
 // =====================
 //    ROUTE BREEZE (AUTH)

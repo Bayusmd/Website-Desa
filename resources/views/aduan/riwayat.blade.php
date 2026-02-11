@@ -25,7 +25,7 @@
                pattern="[0-9]+"
                inputmode="numeric">
 
-        <button class="mt-4 bg-gray-600 hover:bg-gray-700
+        <button class="mt-4 bg-green-600 hover:bg-green-700
                        text-white px-6 py-2 rounded-lg transition">
             Cari Aduan
         </button>

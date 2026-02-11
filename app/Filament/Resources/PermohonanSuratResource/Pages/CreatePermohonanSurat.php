@@ -9,6 +9,9 @@ use App\Models\BerkasPermohonan;
 use Filament\Notifications\Notification;
 use App\Models\Admin;
 use Filament\Notifications\Actions\Action;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class CreatePermohonanSurat extends CreateRecord
 {
@@ -18,7 +21,45 @@ class CreatePermohonanSurat extends CreateRecord
      * Simpan berkas syarat setelah permohonan dibuat
      */
     protected function afterCreate(): void
-    {
+    {     $record = $this->record;
+
+        // Format nomor 08xxx menjadi 628xxx
+        $nomor = preg_replace('/^0/', '62', $record->no_whatsapp);
+
+        // Format tanggal Indonesia
+        Carbon::setLocale('id');
+        $tanggal = Carbon::parse($record->tanggal_permohonan)
+                    ->translatedFormat('d F Y H:i');
+
+        $layanan = optional($record->layanan)->nama_layanan ?? 'Surat';
+
+        $pesan = "Halo {$record->nama_pemohon},\n\n"
+            . "Permohonan surat Anda telah BERHASIL diajukan.\n\n"
+            . "Detail Permohonan:\n"
+            . "Nama: {$record->nama_pemohon}\n"
+            . "Layanan: {$layanan}\n"
+            . "Tanggal Diajukan: {$tanggal}\n"
+            . "ID Permohonan: {$record->id}\n\n"
+            . "Mohon menunggu proses permohonan selesai.\n"
+            . "Kami akan mengonfirmasi kembali apabila surat telah selesai.\n\n"
+            . "Terima kasih.";
+
+        try {
+
+            $response = Http::withHeaders([
+                'Authorization' => config('services.fonnte.token'),
+            ])->asForm()->post('https://api.fonnte.com/send', [
+                'target'  => $nomor,
+                'message' => $pesan,
+            ]);
+
+            Log::info('WA Permohonan Baru: ' . $response->body());
+
+        } catch (\Exception $e) {
+
+            Log::error('Gagal kirim WA Permohonan Baru: ' . $e->getMessage());
+        }
+
         $permohonan = $this->record;
         $data = $this->data;
 

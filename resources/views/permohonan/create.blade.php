@@ -114,7 +114,7 @@
                             </p>
                         @enderror
                 <p class="text-xs text-gray-500 mt-1">
-                    Gunakan format 08xxxxxxxxxx atau 628xxxxxxxxxx
+                    Gunakan format  628xxxxxxxxxx
                 </p>
             </div>
 
