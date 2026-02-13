@@ -93,6 +93,7 @@ class InformasiDesaResource extends Resource
                 Tables\Columns\TextColumn::make('judul')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deskripsi')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\ImageColumn::make('gambar')
                     ->label('Gambar')

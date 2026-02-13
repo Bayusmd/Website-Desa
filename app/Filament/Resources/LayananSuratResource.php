@@ -59,6 +59,7 @@ class LayananSuratResource extends Resource
                 Tables\Columns\TextColumn::make('nama_layanan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deskripsi_layanan')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('tanggal_dibuat')
                     ->date()

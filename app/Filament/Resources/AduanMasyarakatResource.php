@@ -77,12 +77,6 @@ class AduanMasyarakatResource extends Resource
         return $table
                  ->query(
                         AduanMasyarakat::query()
-                            ->orderByRaw("
-                                CASE
-                                    WHEN status_aduan = 'selesai' THEN 2
-                                    ELSE 1
-                                END
-                            ")
                             ->orderBy('tanggal_aduan', 'asc') // urutan
                     )
             ->columns([
@@ -95,6 +89,7 @@ class AduanMasyarakatResource extends Resource
                 Tables\Columns\TextColumn::make('kategori_aduan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deskripsi_aduan')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('tanggal_aduan')
                     ->date()
@@ -110,6 +105,7 @@ class AduanMasyarakatResource extends Resource
             ->filters([
                 //
             ])
+            ->recordUrl(null)
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

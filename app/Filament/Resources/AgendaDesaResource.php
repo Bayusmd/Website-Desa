@@ -62,10 +62,12 @@ class AgendaDesaResource extends Resource
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('nama_agenda')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('lokasi_agenda')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('deskripsi_agenda')
+                    ->wrap()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
