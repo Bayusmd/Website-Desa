@@ -31,7 +31,10 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(AdminLogin::class)                // <-- gunakan custom login class
-            ->authGuard('admin')                      // <-- pastikan guard admin dipakai (optional convenience)
+            ->authGuard('admin')                // <-- pastikan guard admin dipakai (optional convenience)
+            ->authPasswordBroker('admin')
+            ->passwordReset()
+
             ->colors([
                 'primary' => Color::Amber,
             ])

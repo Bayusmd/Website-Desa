@@ -38,12 +38,12 @@ return [
     'guards' => [
        'web' => [
                'driver' => 'session',
-               'provider' => 'admin',
+               'provider' => 'admins',
            ],
 
         'admin' => [
         'driver' => 'session',
-        'provider' => 'admin',
+        'provider' => 'admins',
         ],
     ],
 
@@ -70,7 +70,7 @@ return [
                 // 'model' => App\Models\User::class,
             // ],
 
-        'admin' => [
+        'admins' => [
         'driver' => 'eloquent',
         'model' => App\Models\Admin::class,
         ],
@@ -101,8 +101,8 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'admin' => [
+            'provider' => 'admins',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
             'expire' => 60,
             'throttle' => 60,
